@@ -20,18 +20,9 @@ public class Client {
     static {
         sc =  new Scanner(System.in);
         try {
-            System.out.println("Client started.");
-            soc = new Socket("localhost", 5000);
+            
 
-            // sending data to server
-            out = new PrintWriter(soc.getOutputStream(), true);
-
-            // for getting input from server
-            in = new BufferedReader(new InputStreamReader(soc.getInputStream()));
-
-            // setting up object stream
-            oin = new ObjectInputStream(soc.getInputStream());
-            oout = new ObjectOutputStream(soc.getOutputStream());
+            
 
         } catch (Exception e) {
             System.out.println(e);
@@ -178,45 +169,24 @@ public class Client {
 
     }
 
-    public static void main(String args[]) {
+    public static void main(String args[]) throws IOException, ClassNotFoundException {
         
-        try {
-            int ch;
-            // Accepting the welcome message
-            System.out.println(in.readLine());
-            do{
-            System.out.println(in.readLine());
+        System.out.println("Client started.");
+         soc = new Socket("localhost", 5000);
 
-             ch = sc.nextInt();
+         // sending data to server
+         out = new PrintWriter(soc.getOutputStream(), true);
 
-            out.println(ch);
+         // for getting input from server
+         in = new BufferedReader(new InputStreamReader(soc.getInputStream()));
 
-            switch (ch) {
-                case 1:
-                    // customer
-                    forCustomer();
-                    break;
+         // setting up object stream
+         oin = new ObjectInputStream(soc.getInputStream());
+         oout = new ObjectOutputStream(soc.getOutputStream());
 
-                case 2:
-                    // hotel
-                    forHotel();
-                    break;
+         ServerConnection serverOut = new ServerConnection(soc);
 
-                case 3:
-                    break;
-            }
-        }while(ch != 3);
-
-            System.out.println("Thank You!");
-
-            soc.close();
-            in.close();
-            
-            sc.close();
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+         new Thread(serverOut).start();
 
     }
 }

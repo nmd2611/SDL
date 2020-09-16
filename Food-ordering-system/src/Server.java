@@ -3,6 +3,8 @@
 import java.net.*;
 import java.io.*;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Server  {
     // declaring socket and input stream
@@ -19,30 +21,22 @@ public class Server  {
     static ObjectOutputStream oout;
     static ObjectInputStream oin;
 
+    static ArrayList<ClientHandler> clients;
+
+    static ExecutorService pool = Executors.newFixedThreadPool(4);
+
     static {
 
         cust = new LinkedList<Customer>();
         hotels = new Vector<Hotel>();
         
         try {
-            System.out.println("[SERVER] Waiting for clients...");
-            ss = new ServerSocket(5000);
-            soc = ss.accept();
-
-            System.out.println("Client connected successfully on PORT 5000.");
-
             // reading data from client
-            in = new BufferedReader(new InputStreamReader(soc.getInputStream()));
+           
+           
 
-            // sending data to client
-            out = new PrintWriter(soc.getOutputStream(), true);
-
-            // setting up object stream
-           // System.out.println("hey");
-           oout = new ObjectOutputStream(soc.getOutputStream());
-           oin = new ObjectInputStream(soc.getInputStream());
-
-            //System.out.println("hello");
+           
+          
 
         } catch (Exception e) {
             System.out.println(e);
@@ -184,48 +178,36 @@ public class Server  {
         hotels.add(new Hotel(101, "Jyoti", "admin"));
         hotels.add(new Hotel(102, "Krishna", "admin"));
 
-        try {
+       
 
-            String m1 = "********** WELCOME TO THE FOOD ORDERING SYSTEM **********";
-            String m2 = "1. Customer  2. Admin  3. Exit ";
-            out.println(m1);
+        clients = new ArrayList<>();
 
-            int ch;
-            do{
-            out.println(m2);
+        ss = new ServerSocket(5000);
+        while(true)
+           {
+            System.out.println("[SERVER] Waiting for clients...");
+           
+            soc = ss.accept();
 
-             ch = Integer.parseInt(in.readLine());
+            in = new BufferedReader(new InputStreamReader(soc.getInputStream()));
 
-            System.out.println("Server received " + ch);
+            // sending data to client
+            out = new PrintWriter(soc.getOutputStream(), true);
+    
+            // setting up object stream
+           // System.out.println("hey");
+           oout = new ObjectOutputStream(soc.getOutputStream());
+           oin = new ObjectInputStream(soc.getInputStream());
+    
 
-            switch (ch) {
-                case 1:
-                    // customer
-                    forCustomer();
-                    break;
-                case 2:
-                    // admin
-                    forHotel();
-                    break;
+            System.out.println("Client connected successfully on PORT 5000.");
 
-                case 3:
-                    // exit
-                    break;
-                default:
+            ClientHandler clientThread = new ClientHandler(soc);
 
-                    break;
+            clients.add(clientThread);
 
-            }
-        }while(ch != 3);
-
-        System.out.println("Server shutting down.");
-        
-            ss.close();
-            oin.close();
-            oout.close();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
+            pool.execute(clientThread);
+           }
+       
     }
 }
