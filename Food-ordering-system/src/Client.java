@@ -188,5 +188,8 @@ public class Client {
 
          new Thread(serverOut).start();
 
+
+       
+        
     }
 }

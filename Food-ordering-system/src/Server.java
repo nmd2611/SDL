@@ -174,11 +174,8 @@ public class Server  {
         cust.add(new Customer(1, "nmd", "N", "D", "a@g.com", 12345, "12345"));
         cust.add(new Customer(2, "abc", "A", "B", "abcd@g.com", 54321, "54321"));
 
-
         hotels.add(new Hotel(101, "Jyoti", "admin"));
         hotels.add(new Hotel(102, "Krishna", "admin"));
-
-       
 
         clients = new ArrayList<>();
 

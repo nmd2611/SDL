@@ -63,6 +63,20 @@ public class ClientHandler implements Runnable {
             System.out.println(e);
         }
 
+        // finally{
+        //     try{
+        //         soc.close();
+        //         in.close();
+            
+        //         out.close();
+        //     }
+
+        //     catch(Exception e)
+        //     {
+        //         System.out.println(e.getMessage());
+        //     }
+        // }
+
 
     }
 }

@@ -5,20 +5,19 @@ import java.util.*;
 
 
 public class ServerConnection implements Runnable {
-    private Socket server;
+    private Socket soc;
     private BufferedReader in;
 
     private PrintWriter out;
 
     public ServerConnection(Socket s) throws IOException {
-        server = s;
-        in = new BufferedReader(new InputStreamReader(server.getInputStream()));
-        out = new PrintWriter(s.getOutputStream(), true);
+        soc = s;
+        in = new BufferedReader(new InputStreamReader(soc.getInputStream()));
+        out = new PrintWriter(soc.getOutputStream(), true);
     }
 
     @Override
     public void run() {
-
         Scanner sc = new Scanner(System.in);
         try {
             int ch;
@@ -56,7 +55,7 @@ public class ServerConnection implements Runnable {
         }
         finally{
             try{
-                server.close();
+                soc.close();
                 in.close();
             
                 sc.close();
@@ -67,5 +66,6 @@ public class ServerConnection implements Runnable {
                 System.out.println(e.getMessage());
             }
         }
+
     }
 }
