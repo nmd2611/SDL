@@ -5,6 +5,7 @@ import java.io.*;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.sql.*;
 
 public class Server  {
     // declaring socket and input stream
@@ -24,6 +25,9 @@ public class Server  {
     static ArrayList<ClientHandler> clients;
 
     static ExecutorService pool ;
+    static Connection con;
+    static Statement stmt;
+    static ResultSet rs;
 
     static {
 
@@ -32,8 +36,20 @@ public class Server  {
         
         try {
             // reading data from client
+            Class.forName("org.mariadb.jdbc.Driver");
+            System.out.println("Driver loaded");
+    
+             con = DriverManager.getConnection("jdbc:mariadb://localhost/SDL1", "root", "kalilinux");
            
-           
+            System.out.println("Connection established");
+
+              stmt = con.createStatement();
+
+             // rs = stmt.executeQuery("select * from customer");
+
+            //  while (rs.next())
+            //     System.out.println(rs.getInt(1) + " " + rs.getString(2));
+
             pool = Executors.newFixedThreadPool(4);
            
           
@@ -65,33 +81,64 @@ public class Server  {
         password = in.readLine();
 
         System.out.println(userName + "  " + password);
-
         boolean found = false;
-        for (Customer c : cust) {
-            if (c.getUserName().equals(userName) && c.getPassword().equals(password)) {
 
-                // out.println("Welcome " + c.getUserName());
-                out.println(true);
-                found = true;
+        try{
+            rs = stmt.executeQuery("select * from customer where userName = " + "\"" + userName + "\" and password = " + "\"" + password + "\""  );
+        
+        if(rs.next()){
+            Customer tp = new Customer(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), "TP", 123, rs.getString(5));
+            
+            out.println(true);
+            found = true;
 
-                // sending the customer object
-                oout.writeObject(c);
+            // sending the customer object
+            oout.writeObject(tp);
 
-                // sending the list of hotels
-                oout.writeObject(hotels);
-                 //c.afterLogin(hotels);
+            // sending the list of hotels
+            oout.writeObject(hotels);
+             //c.afterLogin(hotels);
 
-                 System.out.println("Login successful!");
+             System.out.println("Login successful!");
 
-                // Perform necessary action after login
-                // redirect user to the ordering screen where he/she will be able to place
-                // orders
-            }
         }
-        if (!found) {
+        else{
             out.println(false);
             System.out.println("Invalid credentials !!");
         }
+    }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+       
+
+        
+        // for (Customer c : cust) {
+        //     if (c.getUserName().equals(userName) && c.getPassword().equals(password)) {
+
+        //         // out.println("Welcome " + c.getUserName());
+        //         out.println(true);
+        //         found = true;
+
+        //         // sending the customer object
+        //         oout.writeObject(c);
+
+        //         // sending the list of hotels
+        //         oout.writeObject(hotels);
+        //          //c.afterLogin(hotels);
+
+        //          System.out.println("Login successful!");
+
+        //         // Perform necessary action after login
+        //         // redirect user to the ordering screen where he/she will be able to place
+        //         // orders
+        //     }
+        // }
+        // if (!found) {
+        //     out.println(false);
+        //     System.out.println("Invalid credentials !!");
+        // }
 
         // out.println(found);
         }
@@ -100,9 +147,25 @@ public class Server  {
             // signup not working
             Customer c1 = (Customer)oin.readObject();
             System.out.println("User data received.");
-            cust.add(c1);
 
-            System.out.println("User registered.");
+            try{
+                String u = c1.getUserName();
+                String p = c1.getPassword();
+                String f = c1.getFName();
+                String l = c1.getLName();
+                System.out.println(u+ " " + p);
+                stmt.executeUpdate("INSERT INTO customer(fname,lname,userName, password) values ( \"" + f + "\" , \"" + l + "\" , \"" + u + "\" , \"" + p + "\" )" ) ;
+                System.out.println("User registered.");
+            }
+            catch(Exception e)
+            {
+                System.out.println(e.getMessage());
+            }
+           
+            
+         //   cust.add(c1);
+
+          
            out.println("User added successfully!");
         }
 
@@ -151,21 +214,42 @@ public class Server  {
         System.out.println(userName + "  " + password);
 
         boolean found = false;
-        for (Hotel h : hotels) {
-            if (h.getUserName().equals(userName) && h.getPassword().equals(password)) {
 
-                // out.println("Welcome " + c.getUserName());
+        try{
+            rs = stmt.executeQuery("select * from hotel where userName = " + "\"" + userName + "\" and password = " + "\"" + password + "\""  );
+        
+            if(rs.next()){
+                Hotel tp = new Hotel(rs.getInt(1), rs.getString(2), rs.getString(3));
+
                 oout.writeObject(true);
                 found = true;
 
-                oout.writeObject(h);
-            }
+                oout.writeObject(tp);
         }
-
-        if(!found)
-        {
+        else{
             System.out.println("Invalid credentials !!");
         }
+    }
+        catch(Exception e){
+
+        }
+
+
+        // for (Hotel h : hotels) {
+        //     if (h.getUserName().equals(userName) && h.getPassword().equals(password)) {
+
+        //         // out.println("Welcome " + c.getUserName());
+        //         oout.writeObject(true);
+        //         found = true;
+
+        //         oout.writeObject(h);
+        //     }
+        // }
+
+        // if(!found)
+        // {
+        //     System.out.println("Invalid credentials !!");
+        // }
 
 
     }
@@ -181,6 +265,9 @@ public class Server  {
         clients = new ArrayList<>();
 
         ss = new ServerSocket(5000);
+
+        
+
         while(true)
            {
             System.out.println("[SERVER] Waiting for clients...");

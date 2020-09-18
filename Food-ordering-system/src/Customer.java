@@ -32,6 +32,14 @@ public class Customer implements Serializable {
         return userName;
     }
 
+    public String getFName() {
+        return fName;
+    }
+
+    public String getLName() {
+        return lName;
+    }
+
     public int getUserId() {
         return id;
     }
