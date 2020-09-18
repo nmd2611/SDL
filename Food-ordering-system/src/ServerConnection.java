@@ -5,7 +5,7 @@ import java.util.*;
 
 
 public class ServerConnection implements Runnable {
-    private Socket soc;
+    private static Socket soc;
     private BufferedReader in;
 
     private PrintWriter out;
@@ -56,9 +56,9 @@ public class ServerConnection implements Runnable {
         finally{
             try{
                 soc.close();
-                in.close();
+                // in.close();
             
-                sc.close();
+                // sc.close();
             }
 
             catch(Exception e)

@@ -10,6 +10,9 @@ public class ClientHandler implements Runnable {
     static BufferedReader in; // for accepting input from client
     static PrintWriter out; // for sending/writing data to client
 
+    static ObjectOutputStream oout;
+    static ObjectInputStream oin;
+
     ClientHandler(Socket socket_client) throws IOException
     {
         soc = socket_client;
@@ -63,9 +66,9 @@ public class ClientHandler implements Runnable {
         finally{
 
             try{
-                in.close();
+                // in.close();
                 soc.close();
-                out.close();
+                // out.close();
             }
 
             catch(Exception e){
