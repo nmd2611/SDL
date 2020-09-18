@@ -5,14 +5,14 @@ import java.util.*;
 
 public class ClientHandler implements Runnable {
     
-    private Socket soc;
+    static Socket soc;
 
-    private BufferedReader in; // for accepting input from client
-    private PrintWriter out; // for sending/writing data to client
+    static BufferedReader in; // for accepting input from client
+    static PrintWriter out; // for sending/writing data to client
 
     ClientHandler(Socket socket_client) throws IOException
     {
-        this.soc = socket_client;
+        soc = socket_client;
         in = new BufferedReader(new InputStreamReader(soc.getInputStream()));
         out = new PrintWriter(soc.getOutputStream() , true);
     }
@@ -56,26 +56,23 @@ public class ClientHandler implements Runnable {
 
         System.out.println("Server shutting down.");
         
-            in.close();
-            soc.close();
-            out.close();
+            
         } catch (Exception e) {
             System.out.println(e);
         }
+        finally{
 
-        // finally{
-        //     try{
-        //         soc.close();
-        //         in.close();
-            
-        //         out.close();
-        //     }
+            try{
+                in.close();
+                soc.close();
+                out.close();
+            }
 
-        //     catch(Exception e)
-        //     {
-        //         System.out.println(e.getMessage());
-        //     }
-        // }
+            catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+        }
+
 
 
     }

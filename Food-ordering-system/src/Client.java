@@ -40,6 +40,8 @@ public class Client {
         String userName, password;
         ch = sc.nextInt();
 
+        System.out.println(Thread.currentThread().getName());
+
         out.println(ch);
         if (ch == 1) {
             System.out.print("Enter UserName : ");

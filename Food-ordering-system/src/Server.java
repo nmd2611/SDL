@@ -23,7 +23,7 @@ public class Server  {
 
     static ArrayList<ClientHandler> clients;
 
-    static ExecutorService pool = Executors.newFixedThreadPool(4);
+    static ExecutorService pool ;
 
     static {
 
@@ -34,7 +34,7 @@ public class Server  {
             // reading data from client
            
            
-
+            pool = Executors.newFixedThreadPool(4);
            
           
 
@@ -51,11 +51,12 @@ public class Server  {
         /* 1. login
             2. signup
             3. exit    
-        
         */
         do{
          ch = Integer.parseInt(in.readLine()); 
         //System.out.println("Server received --" + ch);
+
+        System.out.println(Thread.currentThread().getName());
 
         if(ch == 1)
         {
