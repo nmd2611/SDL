@@ -1,5 +1,6 @@
 import java.util.*;
 import java.io.*;
+import java.sql.*;
 
 public class Hotel implements Serializable {
 
@@ -12,6 +13,28 @@ public class Hotel implements Serializable {
     // map for storing the list of dishes
     public Map<String, Integer> map;
 
+    static Connection con;
+    static Statement stmt;
+    static ResultSet rs;
+
+    static{
+
+        try{
+            Class.forName("org.mariadb.jdbc.Driver");
+            //System.out.println("Driver loaded");
+        
+            con = DriverManager.getConnection("jdbc:mariadb://localhost/SDL1", "root", "kalilinux");
+               
+            System.out.println("Connection established again");
+    
+            stmt = con.createStatement();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+
     Hotel(int id, String userName, String password) {
         this.id = id;
         this.userName = userName;
@@ -19,10 +42,19 @@ public class Hotel implements Serializable {
 
         map = new HashMap<String, Integer>();
 
-        map.put("Burger", 100);
-        map.put("Icecream", 200);
-        map.put("Tea", 20);
-        map.put("Sandwich", 50);
+        try{
+
+            rs =  stmt.executeQuery("select * from items where hotel_id = " + id );
+
+            while(rs.next()){
+                map.put(rs.getString(3), rs.getInt(4));
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     public String getUserName() {

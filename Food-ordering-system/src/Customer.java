@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.*;
+import java.sql.*;
 
 public class Customer implements Serializable {
 
@@ -14,6 +15,29 @@ public class Customer implements Serializable {
     // name,price,quantity
     private ArrayList<MyTriplet<String, Integer, Integer>> arr;
 
+    static Connection con;
+    static Statement stmt;
+    static ResultSet rs;
+
+    static{
+
+        try{
+            Class.forName("org.mariadb.jdbc.Driver");
+            //System.out.println("Driver loaded");
+        
+            con = DriverManager.getConnection("jdbc:mariadb://localhost/SDL1", "root", "kalilinux");
+               
+            System.out.println("Connection established again");
+    
+            stmt = con.createStatement();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+
     Customer(int id, String userName, String fName, String lName, String email, long phone, String password) {
         this.id = id;
         this.userName = userName;
@@ -26,6 +50,9 @@ public class Customer implements Serializable {
        
 
         arr = new ArrayList<MyTriplet<String, Integer, Integer>>();
+
+        
+
     }
 
     public String getUserName() {
@@ -158,7 +185,7 @@ public class Customer implements Serializable {
         // sc.close();
     }
 
-    public void checkout()
+    public void checkout(int hotel_id)
     {
         int total = 0;
        int i =0;
@@ -166,6 +193,15 @@ public class Customer implements Serializable {
        {
            total += (arr.get(i).getSecond() * arr.get(i).getThird());
        }
+
+    //    try{
+    //     stmt.executeUpdate("insert into orders(customer_id, amount, hotel_id) values (" + id + ","+ total + "," + hotel_id + ")");
+    //    System.out.println(id+" "+ total + " " + hotel_id);
+    // }
+    //    catch(Exception e)
+    //    {
+    //        System.out.println(e.getMessage());
+    //    }
 
        System.out.println("Your Total amount is Rs."+ total);
        System.out.println("Thank You");
@@ -202,7 +238,7 @@ public class Customer implements Serializable {
                     break;
 
                 case 4: 
-                    checkout();
+                    checkout(h.getUserId());
                     break;
 
             }

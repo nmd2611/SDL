@@ -95,8 +95,17 @@ public class Server  {
             // sending the customer object
             oout.writeObject(tp);
 
+            rs = stmt.executeQuery("select * from hotel");
+
+            Vector<Hotel> newH = new Vector<Hotel>();
+            while(rs.next())
+            {
+                Hotel temp = new Hotel(rs.getInt(1), rs.getString(2) , rs.getString(3));
+                newH.add(temp);
+            }
+
             // sending the list of hotels
-            oout.writeObject(hotels);
+            oout.writeObject(newH);
              //c.afterLogin(hotels);
 
              System.out.println("Login successful!");
@@ -217,10 +226,11 @@ public class Server  {
 
         try{
             rs = stmt.executeQuery("select * from hotel where userName = " + "\"" + userName + "\" and password = " + "\"" + password + "\""  );
-        
+            
+           
             if(rs.next()){
                 Hotel tp = new Hotel(rs.getInt(1), rs.getString(2), rs.getString(3));
-
+                
                 oout.writeObject(true);
                 found = true;
 
@@ -256,17 +266,15 @@ public class Server  {
 
     public static void main(String args[]) throws IOException, ClassNotFoundException{
 
-        cust.add(new Customer(1, "nmd", "N", "D", "a@g.com", 12345, "12345"));
-        cust.add(new Customer(2, "abc", "A", "B", "abcd@g.com", 54321, "54321"));
+        // cust.add(new Customer(1, "nmd", "N", "D", "a@g.com", 12345, "12345"));
+        // cust.add(new Customer(2, "abc", "A", "B", "abcd@g.com", 54321, "54321"));
 
-        hotels.add(new Hotel(101, "Jyoti", "admin"));
-        hotels.add(new Hotel(102, "Krishna", "admin"));
+        // hotels.add(new Hotel(101, "Jyoti", "admin"));
+        // hotels.add(new Hotel(102, "Krishna", "admin"));
 
         clients = new ArrayList<>();
 
         ss = new ServerSocket(5000);
-
-        
 
         while(true)
            {
