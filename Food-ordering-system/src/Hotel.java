@@ -27,7 +27,7 @@ public class Hotel implements Serializable {
                
             System.out.println("Connection established again");
     
-            stmt = con.createStatement();
+            //stmt = con.createStatement();
         }
         catch(Exception e)
         {
@@ -43,7 +43,7 @@ public class Hotel implements Serializable {
         map = new HashMap<String, Integer>();
 
         try{
-
+            stmt = con.createStatement();
             rs =  stmt.executeQuery("select * from items where hotel_id = " + id );
 
             while(rs.next()){
@@ -69,7 +69,7 @@ public class Hotel implements Serializable {
         return password;
     }
 
-    public void addItem() {
+    public void addItem()  {
        // Scanner sc = new Scanner(System.in);
         String n;
         int p;
@@ -79,6 +79,19 @@ public class Hotel implements Serializable {
         System.out.print("Enter item price : ");
         p = sc.nextInt();
 
+        // System.out.println("(" + this.id + ", \"" + n+ "\", " +p +  ")");
+        // try{
+        //     stmt = con.createStatement();
+        //    // Statement tp;
+            
+        //     stmt.executeUpdate("INSERT INTO items(hotel_id, name, price) values ( " + this.id + ", \"" + n+ "\", " +p +  ")");
+        //     System.out.println("Item added");
+        // }
+        // catch(Exception e)
+        // {
+        //     System.out.println("hfsfsf");
+        //     e.printStackTrace();
+        // }
         map.put(n, p);
       //  sc.close();
     }
@@ -91,10 +104,23 @@ public class Hotel implements Serializable {
 
         boolean exists = map.containsKey(n);
 
-        if (exists)
-            map.remove(n);
-        else
-            System.out.println("Item not found !");
+        try{
+            String pt = "delete from items where hotel_id = " + this.id + " and  name = \'" + n + "\' ;" ;
+            System.out.println(pt);
+
+            stmt.executeUpdate(pt);
+            System.out.println("deleted");
+
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+
+        // if (exists)
+        //     map.remove(n);
+        // else
+        //     System.out.println("Item not found !");
 
            // sc.close();
 
