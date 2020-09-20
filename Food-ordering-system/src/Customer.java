@@ -47,11 +47,7 @@ public class Customer implements Serializable {
         this.phone = phone;
         this.password = password;
 
-       
-
         arr = new ArrayList<MyTriplet<String, Integer, Integer>>();
-
-        
 
     }
 
@@ -136,21 +132,33 @@ public class Customer implements Serializable {
         System.out.print("Enter item to be deleted : ");
         n = sc.next();
 
-        arr.forEach((t) -> {
+
+        ArrayList<MyTriplet<String, Integer, Integer>> temp = new ArrayList<>();
+
+        arr.forEach((t) ->{
+            temp.add(t);
+        });
+
+        arr.clear();
+
+        temp.forEach((t) -> {
             String item = t.getFirst();
-            if (n.equals(item)) {
-                int p = t.getSecond();
-                int q = t.getThird();
-
-                System.out.println(item + "  " + p + "  " + q);
-
-                MyTriplet<String, Integer, Integer> temp = new MyTriplet<String, Integer, Integer>(item, p, q);
-
-                System.out.println(arr.indexOf(temp));
-
-                arr.remove(temp);
-
+            if(!n.equals(item)){
+                arr.add(t);
             }
+            // if (n.equals(item)) {
+            //     int p = t.getSecond();
+            //     int q = t.getThird();
+
+            //     System.out.println(item + "  " + p + "  " + q);
+
+            //     MyTriplet<String, Integer, Integer> temp = new MyTriplet<String, Integer, Integer>(item, p, q);
+
+            //     System.out.println(arr.indexOf(temp));
+
+            //     arr.remove(temp);
+
+            // }
         });
         System.out.println("Success");
         // if (del == 1)

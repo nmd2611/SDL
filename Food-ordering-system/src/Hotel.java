@@ -46,19 +46,9 @@ public class Hotel implements Serializable {
         this.password = password;
 
         map = new HashMap<String, Integer>();
-
-        // Connection con;
-        // Statement stmt;
-        // ResultSet rs;
-        
         
         try{
-            // Class.forName("org.mariadb.jdbc.Driver");
-            // con = DriverManager.getConnection("jdbc:mariadb://localhost/SDL1", "root", "kalilinux");
-            // System.out.println("Connection established again");
-
-          //  stmt = con.createStatement();
-          
+   
             rs =  stmt.executeQuery("select * from items where hotel_id = " + id );
 
             while(rs.next()){
@@ -263,21 +253,6 @@ public class Hotel implements Serializable {
                         break;
     
                 }
-
-                //  stmt.executeUpdate("delete from items where hotel_id = " + id);
-
-                //  map.forEach((k, v) -> {
-                //      try{
-                //          stmt.executeUpdate("insert into items(hotel_id,name,price) values ("+ id + ", \"" + k + "\" ," + v + " )");
-
-                //      }
-                //      catch(Exception e){
-                //          e.printStackTrace();
-                //      }
-                //  });
-                //  System.out.println("Done");
-
-
 
             }
             catch(Exception e)

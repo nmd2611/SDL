@@ -266,26 +266,7 @@ public class Server  {
 
     }
 
-    // public static void addTest(int h_id,String n, int p) throws UnknownHostException, IOException, ClassNotFoundException, SQLException {
-    //     Connection ct;
-    //     Statement st;
-    //     try{
-    //         Class.forName("org.mariadb.jdbc.Driver");
-
-    //         ct = DriverManager.getConnection("jdbc:mariadb://localhost/SDL1", "root", "kalilinux");
-
-    //         st = ct.createStatement();
-    //         st.executeUpdate("INSERT INTO items(hotel_id, name, price) values ( " + h_id + ", \"" + n+ "\", " +p +  ")");
-    //         System.out.println("Item added");
-    //     }
-    //     catch(Exception e)
-    //     {
-    //         System.out.println("Test");
-    //         e.printStackTrace();
-    //     }
-           
-    
-    // }
+  
 
     public static void main(String args[]) throws IOException, ClassNotFoundException{
 
