@@ -82,11 +82,11 @@ public class Client {
             System.out.print("Enter Last Name : ");
             lName = sc.next();
 
-            System.out.print("Enter Phone no. : ");
-            phone = sc.nextLong();
+            // System.out.print("Enter Phone no. : ");
+            // phone = sc.nextLong();
 
-            System.out.print("Enter Email id : ");
-            email = sc.next();
+            // System.out.print("Enter Email id : ");
+            // email = sc.next();
 
             System.out.print("Select a user name : ");
             userName = sc.next();
@@ -95,7 +95,7 @@ public class Client {
             password = sc.next();
 
 
-            Customer n = new Customer(3, userName, fName, lName, email, phone, password);
+            Customer n = new Customer(3, userName, fName, lName, "test", 12345, password);
 
             // sending the user data to the server
             oout.writeObject(n);

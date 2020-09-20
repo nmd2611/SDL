@@ -194,14 +194,14 @@ public class Customer implements Serializable {
            total += (arr.get(i).getSecond() * arr.get(i).getThird());
        }
 
-    //    try{
-    //     stmt.executeUpdate("insert into orders(customer_id, amount, hotel_id) values (" + id + ","+ total + "," + hotel_id + ")");
-    //    System.out.println(id+" "+ total + " " + hotel_id);
-    // }
-    //    catch(Exception e)
-    //    {
-    //        System.out.println(e.getMessage());
-    //    }
+       try{
+        stmt.executeUpdate("insert into orders(customer_id, amount, hotel_id) values (" + id + ","+ total + "," + hotel_id + ")");
+      // System.out.println(id+" "+ total + " " + hotel_id);
+    }
+       catch(Exception e)
+       {
+           System.out.println(e.getMessage());
+       }
 
        System.out.println("Your Total amount is Rs."+ total);
        System.out.println("Thank You");

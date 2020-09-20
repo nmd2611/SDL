@@ -1,6 +1,9 @@
 import java.util.*;
 import java.io.*;
 import java.sql.*;
+import java.net.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 public class Hotel implements Serializable {
 
@@ -13,9 +16,11 @@ public class Hotel implements Serializable {
     // map for storing the list of dishes
     public Map<String, Integer> map;
 
-    static Connection con;
-    static Statement stmt;
-    static ResultSet rs;
+    public static Connection con;
+    public static Statement stmt;
+    public static ResultSet rs;
+    public static PreparedStatement tsm;
+    
 
     static{
 
@@ -27,7 +32,7 @@ public class Hotel implements Serializable {
                
             System.out.println("Connection established again");
     
-            //stmt = con.createStatement();
+            stmt = con.createStatement();
         }
         catch(Exception e)
         {
@@ -42,19 +47,29 @@ public class Hotel implements Serializable {
 
         map = new HashMap<String, Integer>();
 
+        // Connection con;
+        // Statement stmt;
+        // ResultSet rs;
+        
+        
         try{
-            stmt = con.createStatement();
+            // Class.forName("org.mariadb.jdbc.Driver");
+            // con = DriverManager.getConnection("jdbc:mariadb://localhost/SDL1", "root", "kalilinux");
+            // System.out.println("Connection established again");
+
+          //  stmt = con.createStatement();
+          
             rs =  stmt.executeQuery("select * from items where hotel_id = " + id );
 
             while(rs.next()){
                 map.put(rs.getString(3), rs.getInt(4));
             }
+           
         }
         catch(Exception e)
         {
             System.out.println(e.getMessage());
         }
-
     }
 
     public String getUserName() {
@@ -79,19 +94,39 @@ public class Hotel implements Serializable {
         System.out.print("Enter item price : ");
         p = sc.nextInt();
 
-        // System.out.println("(" + this.id + ", \"" + n+ "\", " +p +  ")");
+        // Connection con;
+        // Statement stmt;
+        // ResultSet rs;
+
         // try{
+        //     Class.forName("org.mariadb.jdbc.Driver");
+        //     con = DriverManager.getConnection("jdbc:mariadb://localhost/SDL1", "root", "kalilinux");
         //     stmt = con.createStatement();
-        //    // Statement tp;
-            
-        //     stmt.executeUpdate("INSERT INTO items(hotel_id, name, price) values ( " + this.id + ", \"" + n+ "\", " +p +  ")");
-        //     System.out.println("Item added");
+        //     Server.addTest(id, n, p);
         // }
         // catch(Exception e)
         // {
-        //     System.out.println("hfsfsf");
         //     e.printStackTrace();
         // }
+      
+       
+        // // System.out.println("(" + this.id + ", \"" + n+ "\", " +p +  ")");
+        try{
+            // Class.forName("org.mariadb.jdbc.Driver");
+            // con = DriverManager.getConnection("jdbc:mariadb://localhost/SDL1", "root", "kalilinux");
+            // System.out.println("Connection established again");
+
+            // stmt = con.createStatement();
+           // Statement tp;
+            
+            stmt.executeUpdate("INSERT INTO items(hotel_id, name, price) values ( " + this.id + ", \"" + n+ "\", " +p +  ")");
+            System.out.println("Item added");
+        }
+        catch(Exception e)
+        {
+            System.out.println("hfsfsf");
+            e.printStackTrace();
+        }
         map.put(n, p);
       //  sc.close();
     }
@@ -103,10 +138,13 @@ public class Hotel implements Serializable {
         n = sc.next();
 
         boolean exists = map.containsKey(n);
+        
 
         try{
+            // rs = stmt.executeQuery("select * from items");
+            // System.out.println(rs.getString(3));
             String pt = "delete from items where hotel_id = " + this.id + " and  name = \'" + n + "\' ;" ;
-            System.out.println(pt);
+            //System.out.println(pt);
 
             stmt.executeUpdate(pt);
             System.out.println("deleted");
@@ -114,7 +152,7 @@ public class Hotel implements Serializable {
         }
         catch(Exception e)
         {
-            System.out.println(e.getMessage());
+           e.printStackTrace();
         }
 
         // if (exists)
@@ -136,7 +174,19 @@ public class Hotel implements Serializable {
         System.out.print("Enter new price : ");
         newp = sc.nextInt();
 
-        map.replace(n, newp);
+        try{
+            String t = "UPDATE items SET price = " + newp + " where hotel_id = " + id + " and name = \"" + n + "\"" ;
+          //  System.out.println(t);
+            stmt.executeUpdate(t);
+
+            System.out.println("Item modified");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
+       // map.replace(n, newp);
 
         System.out.println("Item modified successfully !");
 
@@ -144,6 +194,19 @@ public class Hotel implements Serializable {
     }
 
     public void displayItems() {
+        try{
+            map.clear();
+            rs =  stmt.executeQuery("select * from items where hotel_id = " + id );
+
+            while(rs.next()){
+                map.put(rs.getString(3), rs.getInt(4));
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+       
 
         System.out.println("Item name \t Price");
         System.out.println("*************************");
@@ -173,32 +236,55 @@ public class Hotel implements Serializable {
             System.out.println("1. Add Item \n2. Delete Item \n3. Modify Item \n4. Display List \n5. Exit");
             ch = sc.nextInt();
 
-            switch (ch) {
+            try{
+                switch (ch) {
 
-                case 1:
-                    // Add Item
-                    addItem();
-                    break;
+                    case 1:
+                        // Add Item
+                        addItem();
+                        break;
+    
+                    case 2:
+                        // Delete Item
+                        deleteItem();
+                        break;
+    
+                    case 3:
+                        // Modify Item
+                        modifyItem();
+                        break;
+    
+                    case 4:
+                        // Display list
+                        displayItems();
+                        break;
+    
+                    case 5:
+                        break;
+    
+                }
 
-                case 2:
-                    // Delete Item
-                    deleteItem();
-                    break;
+                //  stmt.executeUpdate("delete from items where hotel_id = " + id);
 
-                case 3:
-                    // Modify Item
-                    modifyItem();
-                    break;
+                //  map.forEach((k, v) -> {
+                //      try{
+                //          stmt.executeUpdate("insert into items(hotel_id,name,price) values ("+ id + ", \"" + k + "\" ," + v + " )");
 
-                case 4:
-                    // Display list
-                    displayItems();
-                    break;
+                //      }
+                //      catch(Exception e){
+                //          e.printStackTrace();
+                //      }
+                //  });
+                //  System.out.println("Done");
 
-                case 5:
-                    break;
+
 
             }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+           
 
         } while (ch != 5);
        // sc.close();
