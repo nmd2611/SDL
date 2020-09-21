@@ -27,7 +27,7 @@ public class Customer implements Serializable {
         
             con = DriverManager.getConnection("jdbc:mariadb://localhost/SDL1", "root", "kalilinux");
                
-            System.out.println("Connection established again");
+            //System.out.println("Connection established again");
     
             stmt = con.createStatement();
         }
@@ -146,26 +146,10 @@ public class Customer implements Serializable {
             if(!n.equals(item)){
                 arr.add(t);
             }
-            // if (n.equals(item)) {
-            //     int p = t.getSecond();
-            //     int q = t.getThird();
-
-            //     System.out.println(item + "  " + p + "  " + q);
-
-            //     MyTriplet<String, Integer, Integer> temp = new MyTriplet<String, Integer, Integer>(item, p, q);
-
-            //     System.out.println(arr.indexOf(temp));
-
-            //     arr.remove(temp);
-
-            // }
+     
         });
         System.out.println("Success");
-        // if (del == 1)
-        // System.out.println("Item deleted successfully !");
-        // else
-        // System.out.println("Item not found !");
-
+     
         // sc.close();
     }
 

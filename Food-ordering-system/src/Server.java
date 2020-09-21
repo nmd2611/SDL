@@ -26,7 +26,10 @@ public class Server  {
 
     static ArrayList<ClientHandler> clients;
 
+    // Required for implementing threadpool
     static ExecutorService pool ;
+
+    // Required for database connectivity
     static Connection con;
     static Statement stmt;
     static ResultSet rs;
@@ -41,16 +44,11 @@ public class Server  {
             Class.forName("org.mariadb.jdbc.Driver");
             System.out.println("Driver loaded");
     
-             con = DriverManager.getConnection("jdbc:mariadb://localhost/SDL1", "root", "kalilinux");
+            con = DriverManager.getConnection("jdbc:mariadb://localhost/SDL1", "root", "kalilinux");
            
             System.out.println("Connection established");
 
               stmt = con.createStatement();
-
-             // rs = stmt.executeQuery("select * from customer");
-
-            //  while (rs.next())
-            //     System.out.println(rs.getInt(1) + " " + rs.getString(2));
 
             pool = Executors.newFixedThreadPool(4);
            
@@ -122,36 +120,6 @@ public class Server  {
         {
             System.out.println(e);
         }
-       
-
-        
-        // for (Customer c : cust) {
-        //     if (c.getUserName().equals(userName) && c.getPassword().equals(password)) {
-
-        //         // out.println("Welcome " + c.getUserName());
-        //         out.println(true);
-        //         found = true;
-
-        //         // sending the customer object
-        //         oout.writeObject(c);
-
-        //         // sending the list of hotels
-        //         oout.writeObject(hotels);
-        //          //c.afterLogin(hotels);
-
-        //          System.out.println("Login successful!");
-
-        //         // Perform necessary action after login
-        //         // redirect user to the ordering screen where he/she will be able to place
-        //         // orders
-        //     }
-        // }
-        // if (!found) {
-        //     out.println(false);
-        //     System.out.println("Invalid credentials !!");
-        // }
-
-        // out.println(found);
         }
         else if(ch == 2)
         {
@@ -245,24 +213,6 @@ public class Server  {
         catch(Exception e){
 
         }
-
-
-        // for (Hotel h : hotels) {
-        //     if (h.getUserName().equals(userName) && h.getPassword().equals(password)) {
-
-        //         // out.println("Welcome " + c.getUserName());
-        //         oout.writeObject(true);
-        //         found = true;
-
-        //         oout.writeObject(h);
-        //     }
-        // }
-
-        // if(!found)
-        // {
-        //     System.out.println("Invalid credentials !!");
-        // }
-
 
     }
 

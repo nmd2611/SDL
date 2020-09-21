@@ -29,8 +29,6 @@ public class Hotel implements Serializable {
             //System.out.println("Driver loaded");
         
             con = DriverManager.getConnection("jdbc:mariadb://localhost/SDL1", "root", "kalilinux");
-               
-            System.out.println("Connection established again");
     
             stmt = con.createStatement();
         }
@@ -48,7 +46,6 @@ public class Hotel implements Serializable {
         map = new HashMap<String, Integer>();
         
         try{
-   
             rs =  stmt.executeQuery("select * from items where hotel_id = " + id );
 
             while(rs.next()){
@@ -84,31 +81,7 @@ public class Hotel implements Serializable {
         System.out.print("Enter item price : ");
         p = sc.nextInt();
 
-        // Connection con;
-        // Statement stmt;
-        // ResultSet rs;
-
-        // try{
-        //     Class.forName("org.mariadb.jdbc.Driver");
-        //     con = DriverManager.getConnection("jdbc:mariadb://localhost/SDL1", "root", "kalilinux");
-        //     stmt = con.createStatement();
-        //     Server.addTest(id, n, p);
-        // }
-        // catch(Exception e)
-        // {
-        //     e.printStackTrace();
-        // }
-      
-       
-        // // System.out.println("(" + this.id + ", \"" + n+ "\", " +p +  ")");
-        try{
-            // Class.forName("org.mariadb.jdbc.Driver");
-            // con = DriverManager.getConnection("jdbc:mariadb://localhost/SDL1", "root", "kalilinux");
-            // System.out.println("Connection established again");
-
-            // stmt = con.createStatement();
-           // Statement tp;
-            
+        try{ 
             stmt.executeUpdate("INSERT INTO items(hotel_id, name, price) values ( " + this.id + ", \"" + n+ "\", " +p +  ")");
             System.out.println("Item added");
         }
@@ -131,8 +104,7 @@ public class Hotel implements Serializable {
         
 
         try{
-            // rs = stmt.executeQuery("select * from items");
-            // System.out.println(rs.getString(3));
+            
             String pt = "delete from items where hotel_id = " + this.id + " and  name = \'" + n + "\' ;" ;
             //System.out.println(pt);
 

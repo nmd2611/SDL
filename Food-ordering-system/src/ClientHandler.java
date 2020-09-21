@@ -75,8 +75,5 @@ public class ClientHandler implements Runnable {
                 System.out.println(e.getMessage());
             }
         }
-
-
-
     }
 }
