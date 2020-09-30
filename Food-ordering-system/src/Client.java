@@ -7,7 +7,7 @@ import java.util.*;
 public class Client {
     // initialize socket and input output streams
 
-     static Scanner sc ;
+    static Scanner sc ;
     static Socket soc;
     static BufferedReader br;
 

@@ -48,7 +48,7 @@ public class Server  {
            
             System.out.println("Connection established");
 
-              stmt = con.createStatement();
+            stmt = con.createStatement();
 
             pool = Executors.newFixedThreadPool(4);
            
