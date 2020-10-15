@@ -25,6 +25,8 @@ public class Client {
     static ObjectOutputStream oout;
     static ObjectInputStream oin;
 
+    static LoginFrame loginFrame;
+
     static {
         sc =  new Scanner(System.in);
         try {
@@ -52,13 +54,13 @@ public class Client {
 
         out.println(ch);
         if (ch == 1) {
-            System.out.print("Enter UserName : ");
-            userName = sc.next();
-            System.out.print("Enter Password : ");
-            password = sc.next();
+            // System.out.print("Enter UserName : ");
+            // userName = sc.next();
+            // System.out.print("Enter Password : ");
+            // password = sc.next();
+            loginFrame = new LoginFrame();
 
-            out.println(userName);
-            out.println(password);
+            
 
             boolean found = Boolean.parseBoolean(in.readLine());
             System.out.println(found);
@@ -150,15 +152,16 @@ public class Client {
             System.out.println(" ********** Hotel Page ********** ");
        // System.out.println("1. Login \n2. SignUp \n3. Chat \n4. Exit");
             String userName, password;
-        
-    
-            System.out.print("Enter UserName : ");
-            userName = sc.next();
-            System.out.print("Enter Password : ");
-            password = sc.next();
 
-            out.println(userName);
-            out.println(password);
+            loginFrame = new LoginFrame();
+    
+            // System.out.print("Enter UserName : ");
+            // userName = sc.next();
+            // System.out.print("Enter Password : ");
+            // password = sc.next();
+
+            // out.println(userName);
+            // out.println(password);
 
              boolean found = (boolean)oin.readObject();
              //System.out.println(found + " tp");
@@ -177,6 +180,18 @@ public class Client {
             }
  
 
+    }
+
+    public static void sendCredentials(String u, String p)
+    {
+        u = loginFrame.getUsername();
+        p = loginFrame.getPassword();
+
+        System.out.println("Client :  " + u + " " + p);
+            
+
+        out.println(u);
+        out.println(p);
     }
 
     public static void main(String args[]) throws IOException, ClassNotFoundException {

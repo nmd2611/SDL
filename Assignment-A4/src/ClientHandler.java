@@ -27,6 +27,7 @@ public class ClientHandler implements Runnable {
 
             String m1 = "********** WELCOME TO THE FOOD ORDERING SYSTEM **********";
             String m2 = "1. Customer  2. Admin  3. Exit ";
+            // out.println(m1);
             out.println(m1);
 
             int ch;
@@ -76,4 +77,5 @@ public class ClientHandler implements Runnable {
             }
         }
     }
+
 }
