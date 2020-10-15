@@ -8,19 +8,25 @@ import java.io.*;
 public class SignupFrame extends JFrame implements ActionListener  {
 
     JButton b1;
-    JLabel l1,l2,l3;
-    JTextField t1;
-    JPasswordField t2;
+    JLabel l1,l2,l3,l4;
+    JTextField t1,t2,t3;
+    JPasswordField t4;
 
     public SignupFrame()
     {
         setLayout(null);
 
-        l1 = new JLabel("Enter username");     // creating a  label
-        l2 = new JLabel("Enter password");
+        l1 = new JLabel("First Name");     // creating a  label
+        l2 = new JLabel("Last Name");
+
+        l3 = new JLabel("Enter a username");     // creating a  label
+        l4 = new JLabel("Create a password");
 
         t1 = new JTextField(20);    // textfield
-        t2 = new JPasswordField(20);
+        t2 = new JTextField(20);
+
+        t3 = new JTextField(20);    // textfield
+        t4 = new JPasswordField(20);
 
         b1 = new JButton("SIGN UP");
 
@@ -42,10 +48,16 @@ public class SignupFrame extends JFrame implements ActionListener  {
         l1.setBounds(350,150,120,30);
         l2.setBounds(350,220,120,30);
 
+        l3.setBounds(300,290,320,30);
+        l4.setBounds(300,360,320,30);
+
         t1.setBounds(470,150,120,30);
         t2.setBounds(470,220,120,30);
 
-        b1.setBounds(410,300, 100, 30);
+        t3.setBounds(470,290,120,30);
+        t4.setBounds(470,360,120,30);
+
+        b1.setBounds(410,450, 100, 30);
 
     }
 
@@ -53,8 +65,14 @@ public class SignupFrame extends JFrame implements ActionListener  {
         add(l1);
         add(l2);
 
+        add(l3);
+        add(l4);
+
         add(t1);
         add(t2);
+
+        add(t3);
+        add(t4);
 
         add(b1);
         //add(l2);
@@ -98,7 +116,7 @@ public class SignupFrame extends JFrame implements ActionListener  {
 
  class App3 {
     public static void main(String[] args) throws Exception {
-        LoginFrame obj = new LoginFrame();
+        SignupFrame obj = new SignupFrame();
 
       
     }
