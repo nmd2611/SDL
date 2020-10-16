@@ -70,12 +70,14 @@ public class Server  {
         */
         do{
          ch = Integer.parseInt(in.readLine()); 
-        //System.out.println("Server received --" + ch);
+        System.out.println("Server received -" + ch);
 
         System.out.println(Thread.currentThread().getName());
 
         if(ch == 1)
         {
+            System.out.println("Inside 1");
+
             String userName, password;
         userName = in.readLine();
         password = in.readLine();
@@ -184,7 +186,7 @@ public class Server  {
 
     public static void forHotel() throws IOException {
 
-        System.out.println("For Hotel");
+        System.out.println("Inside Hotel");
         String userName, password;
 
         userName = in.readLine();
@@ -208,6 +210,11 @@ public class Server  {
         }
         else{
             System.out.println("Invalid credentials !!");
+        }
+        
+        if(found)
+        {
+            System.out.println("hotel Login success");
         }
     }
         catch(Exception e){

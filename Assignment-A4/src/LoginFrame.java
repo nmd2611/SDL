@@ -96,10 +96,10 @@ public class LoginFrame extends JFrame implements ActionListener  {
 }
 
 
- class App2 {
-    public static void main(String[] args) throws Exception {
-        LoginFrame obj = new LoginFrame();
+//  class App2 {
+//     public static void main(String[] args) throws Exception {
+//         LoginFrame obj = new LoginFrame();
 
       
-    }
-}
+//     }
+// }

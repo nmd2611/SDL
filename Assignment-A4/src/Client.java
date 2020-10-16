@@ -26,6 +26,7 @@ public class Client {
     static ObjectInputStream oin;
 
     static LoginFrame loginFrame;
+    static CustomerFrame cframe;
 
     static {
         sc =  new Scanner(System.in);
@@ -50,6 +51,8 @@ public class Client {
         String userName, password;
         ch = sc.nextInt();
 
+        cframe = new CustomerFrame();
+
      //   System.out.println(Thread.currentThread().getName());
 
         out.println(ch);
@@ -58,7 +61,7 @@ public class Client {
             // userName = sc.next();
             // System.out.print("Enter Password : ");
             // password = sc.next();
-            loginFrame = new LoginFrame();
+            //loginFrame = new LoginFrame();
 
             
 
@@ -153,15 +156,15 @@ public class Client {
        // System.out.println("1. Login \n2. SignUp \n3. Chat \n4. Exit");
             String userName, password;
 
-            loginFrame = new LoginFrame();
+          //  loginFrame = new LoginFrame();
     
-            // System.out.print("Enter UserName : ");
-            // userName = sc.next();
-            // System.out.print("Enter Password : ");
-            // password = sc.next();
+            System.out.print("Enter UserName : ");
+            userName = sc.next();
+            System.out.print("Enter Password : ");
+            password = sc.next();
 
-            // out.println(userName);
-            // out.println(password);
+            out.println(userName);
+            out.println(password);
 
              boolean found = (boolean)oin.readObject();
              //System.out.println(found + " tp");
@@ -184,14 +187,21 @@ public class Client {
 
     public static void sendCredentials(String u, String p)
     {
-        u = loginFrame.getUsername();
-        p = loginFrame.getPassword();
+       // u = loginFrame.getUsername();
+       // p = loginFrame.getPassword();
 
         System.out.println("Client :  " + u + " " + p);
             
 
         out.println(u);
         out.println(p);
+    }
+
+    public static void sendChoice(int ch)
+    {
+       // System.out.println("before Value sent");
+        out.println(ch);
+        //System.out.println("Value sent");
     }
 
     public static void main(String args[]) throws IOException, ClassNotFoundException {
