@@ -89,12 +89,25 @@ public class SignupFrame extends JFrame implements ActionListener  {
     {
         if(e.getSource() == b1)
         {
-            String u;
-            String p;
-            u = t1.getText().toString();
-            p = t2.getText().toString();
+            String u, p;
+            String f,l;
 
-            Client.sendCredentials(u, p);
+            f = t1.getText().toString();
+            l = t2.getText().toString();
+
+            u = t3.getText().toString();
+            p = t4.getText().toString();
+
+            try{
+                Client.registerCustomer(f, l,u, p);
+            }
+            catch(Exception exc)
+            {
+                exc.printStackTrace();
+            }
+
+       
+            //Client.sendCredentials(u, p);
 
             //System.out.println(u + "  " + p);
         }

@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;  
 import java.io.*;
+import java.util.*;
 
 
 
@@ -14,6 +15,7 @@ public class WelcomeFrame extends JFrame implements ActionListener  {
     public WelcomeFrame()
     {
         setLayout(null);
+        setUIFont (new javax.swing.plaf.FontUIResource("Times New Roman",Font.BOLD,17));
 
         l1 = new JLabel("Welcome To Food Ordering System!");     // creating a  label
 
@@ -26,12 +28,14 @@ public class WelcomeFrame extends JFrame implements ActionListener  {
         addActionEvent();
 
 
-
+     
         setVisible(true);   // shows the application window
         setSize(1000,700);   // set size of the app window
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         setLocation(500,200);   // an offset for the window from top left 
         setTitle("Welcome  Page");
+
+        
         
     }
 
@@ -97,6 +101,16 @@ public class WelcomeFrame extends JFrame implements ActionListener  {
 
         }
     }
+
+    public static void setUIFont (javax.swing.plaf.FontUIResource f){
+        Enumeration keys = UIManager.getDefaults().keys();
+        while (keys.hasMoreElements()) {
+          Object key = keys.nextElement();
+          Object value = UIManager.get (key);
+          if (value instanceof javax.swing.plaf.FontUIResource)
+            UIManager.put (key, f);
+          }
+        } 
 
     
 }

@@ -189,6 +189,25 @@ public class Hotel implements Serializable {
         return -1;
     }
 
+    public Map<String, Integer> getMenu()
+    {
+        try{
+            map.clear();
+            rs =  stmt.executeQuery("select * from items where hotel_id = " + id );
+
+            while(rs.next()){
+                map.put(rs.getString(3), rs.getInt(4));
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return map;
+
+    }
+
     public void afterLogin() {
 
        // Scanner sc = new Scanner(System.in);

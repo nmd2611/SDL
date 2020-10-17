@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;  
 import java.io.*;
+import java.util.*;
 
 
 
@@ -77,6 +78,34 @@ public class LoginFrame extends JFrame implements ActionListener  {
             p = t2.getText().toString();
 
             Client.sendCredentials(u, p);
+
+            try{
+                boolean status = Client.getStatus();
+
+                if(status)
+                {
+                    System.out.println("Balle Balle");
+                    Customer c = Client.getCustomer();
+
+                    System.out.println("Welcome " + c.getFName() + ' ' + c.getLName());
+
+                    Vector<Hotel> hotels = Client.getHotels();
+
+                    new AfterLoginCFrame(c , hotels);
+
+                    dispose();
+
+                    ///System.out.println(hotels);
+                }
+                else{
+                    System.out.println("Not balle balle");
+                }
+            }
+            catch(Exception tp)
+            {
+                tp.printStackTrace();
+            }
+           
 
             //System.out.println(u + "  " + p);
         }

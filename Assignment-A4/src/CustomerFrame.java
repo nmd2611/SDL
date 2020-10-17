@@ -108,10 +108,10 @@ public class CustomerFrame extends JFrame implements ActionListener  {
 }
 
 
- class A {
-    public static void main(String[] args) throws Exception {
-        CustomerFrame obj = new CustomerFrame();
+//  class A {
+//     public static void main(String[] args) throws Exception {
+//         CustomerFrame obj = new CustomerFrame();
 
       
-    }
-}
+//     }
+// }

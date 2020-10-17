@@ -167,7 +167,7 @@ public class Client {
             out.println(password);
 
              boolean found = (boolean)oin.readObject();
-             //System.out.println(found + " tp");
+             System.out.println(found + " tp");
 
              Hotel h;
              if (found) {
@@ -197,12 +197,47 @@ public class Client {
         out.println(p);
     }
 
+    public static void registerCustomer(String fName, String lName,String userName, String password) throws ClassNotFoundException, IOException
+    {
+        System.out.println("reg cust");
+        Customer n = new Customer(3, userName, fName, lName, "test", 12345, password);
+
+            // sending the user data to the server
+        oout.writeObject(n);
+    }
+
     public static void sendChoice(int ch)
     {
        // System.out.println("before Value sent");
         out.println(ch);
         //System.out.println("Value sent");
     }
+
+    public static boolean getStatus() throws ClassNotFoundException, IOException
+    {
+        System.out.println("Aya in get status");
+        boolean status = Boolean.parseBoolean(in.readLine());
+        return status;
+    }
+
+    public static Customer getCustomer() throws ClassNotFoundException, IOException
+    {
+        System.out.println("Aya in get customer");
+        Customer c;
+        c = (Customer) oin.readObject();
+
+        return c;
+    }
+
+    public static Vector<Hotel> getHotels() throws ClassNotFoundException, IOException
+    {
+        System.out.println("Aya in get hotels");
+        Vector<Hotel> hotels = (Vector<Hotel>) oin.readObject();
+
+        return hotels;
+    }
+
+    
 
     public static void main(String args[]) throws IOException, ClassNotFoundException {
         
