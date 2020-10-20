@@ -147,7 +147,7 @@ public class Server  {
          //   cust.add(c1);
 
           
-           out.println("User added successfully!");
+         //  out.println("User added successfully!");
         }
 
         else if(ch == 3)
@@ -203,8 +203,9 @@ public class Server  {
             if(rs.next()){
                 Hotel tp = new Hotel(rs.getInt(1), rs.getString(2), rs.getString(3));
                 
-                oout.writeObject(true);
+                out.println(true);
                 found = true;
+                
 
                 oout.writeObject(tp);
         }

@@ -6,14 +6,14 @@ import java.util.*;
 
 
 
-public class LoginFrame extends JFrame implements ActionListener  {
+public class HLoginFrame extends JFrame implements ActionListener  {
 
     JButton b1;
     JLabel l1,l2,l3;
     JTextField t1;
     JPasswordField t2;
 
-    public LoginFrame()
+    public HLoginFrame()
     {
         setLayout(null);
 
@@ -85,13 +85,15 @@ public class LoginFrame extends JFrame implements ActionListener  {
                 if(status)
                 {
                     System.out.println("Balle Balle");
-                    Customer c = Client.getCustomer();
 
-                    System.out.println("Welcome " + c.getFName() + ' ' + c.getLName());
+                    Hotel h = Client.getHotel();
+                    //Customer c = Client.getCustomer();
 
-                    Vector<Hotel> hotels = Client.getHotels();
+                    System.out.println("Welcome " + h.getUserName() );
 
-                    new AfterLoginCFrame(c , hotels);
+                    //Vector<Hotel> hotels = Client.getHotels();
+
+                    new AfterLoginHFrame(h);
 
                     dispose();
 

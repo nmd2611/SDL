@@ -7,7 +7,7 @@ import java.io.*;
 import java.util.*;
 
 
-public class AfterLoginCFrame extends JFrame implements ActionListener  {
+public class AfterLoginHFrame extends JFrame implements ActionListener  {
 
     JButton b1,b2,b3;
     JLabel l1,l2,l3;
@@ -29,124 +29,116 @@ public class AfterLoginCFrame extends JFrame implements ActionListener  {
 
     Customer c ;
     Vector<Hotel> hotels;
+
+   // Hotel h;
     
 
-    public AfterLoginCFrame(Customer c , Vector<Hotel> hotels)
+    public AfterLoginHFrame(Hotel h)
     {
         setLayout(null);
         idx = 0;
 
-        this.c = c;
-        this.hotels = hotels;
+        // this.c = c;
+        // this.hotels = hotels;
 
-        l1 = new JLabel("Welcome " + c.getFName());     // creating a  label
-        l2 = new JLabel("Hotel " + hotels.get(0).getUserName() + "\'s Menu ");
-        l3 = new JLabel("Your Cart");
+         l1 = new JLabel("Welcome " + h.getUserName());     // creating a  label
+        // l2 = new JLabel("Hotel " + hotels.get(0).getUserName() + "\'s Menu ");
+        // l3 = new JLabel("Your Cart");
 
-        add = new JPanel();
-        delete = new JPanel();
+        // add = new JPanel();
+        // delete = new JPanel();
 
-        add.setLayout(null);
-        delete.setLayout(null);
+        // add.setLayout(null);
+        // delete.setLayout(null);
 
-        tp=new JTabbedPane();
+        // tp=new JTabbedPane();
 
-        m = hotels.get(0).getMenu();
-        String col[] = {"SR. NO.", "ITEM", "M.R.P."};
-        String col2[] = {"SR. NO.", "ITEM", "M.R.P.", "QUANTITY"};
+        // m = hotels.get(0).getMenu();
+        // String col[] = {"SR. NO.", "ITEM", "M.R.P."};
+        // String col2[] = {"SR. NO.", "ITEM", "M.R.P.", "QUANTITY"};
 
-        // map to string
+        // // map to string
 
-         data = new String[10][3];
-         data2 =new String[10][4];
+        //  data = new String[10][3];
+        //  data2 =new String[10][4];
 
         
 
         //ArrayList<ArrayList<String>> a = new ArrayList<ArrayList<String>>();
-        int count = 0;
+        // int count = 0;
 
-        for(Map.Entry<String,Integer> entry : m.entrySet()){
-            data[count][0] = (count+1) + "";
-             data[count][1] = entry.getKey();
-             data[count][2] = entry.getValue().toString();
-                count++;
-        }
+        // for(Map.Entry<String,Integer> entry : m.entrySet()){
+        //     data[count][0] = (count+1) + "";
+        //      data[count][1] = entry.getKey();
+        //      data[count][2] = entry.getValue().toString();
+        //         count++;
+        // }
         
-        menu = new JTable(data,col);
-        menu.setEnabled(false);
+        // menu = new JTable(data,col);
+        // menu.setEnabled(false);
 
-        cart = new JTable(data2, col2);
-        cart.setEnabled(false);
+        // cart = new JTable(data2, col2);
+        // cart.setEnabled(false);
 
-        // h = new JTableHeader()
-        // h = menu.getTableHeader();
+        // // h = new JTableHeader()
+        // // h = menu.getTableHeader();
         
-        sp1 = new JScrollPane(menu);
-        sp2 = new JScrollPane(cart); 
+        // sp1 = new JScrollPane(menu);
+        // sp2 = new JScrollPane(cart); 
 
-        b1 = new JButton("Place Order");
+        // b1 = new JButton("Place Order");
 
-        tAdd = new JTextField();
-        tDelete = new JTextField();
-        tQuantity = new JTextField();
+        // tAdd = new JTextField();
+        // tDelete = new JTextField();
+        // tQuantity = new JTextField();
 
-        bAdd = new JButton("Add");
-        bDelete = new JButton("Delete");
+        // bAdd = new JButton("Add");
+        // bDelete = new JButton("Delete");
 
-        lAdd = new JLabel("Item Name");
-        lQuantity = new JLabel("Quantity");
-        lDelete = new JLabel("Item Name");
+        // lAdd = new JLabel("Item Name");
+        // lQuantity = new JLabel("Quantity");
+        // lDelete = new JLabel("Item Name");
 
-        //add(sp1);
-       // sp1.setViewportView(menu);
-       // sp1.setRowHeaderView(menu);
-        
-      //  menu.setFillsViewportHeight(true); 
+      
 
         setLocationAndSize();
         addComponentstoUI();
-        addActionEvent();
-
-        // data[5][0] = "6";
-        // data[5][1] = "tes";
-        // data[5][2] = "testing";
-
-
+        //addActionEvent();
 
         setVisible(true);   // shows the application window
         setSize(1000,700);   // set size of the app window
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         setLocation(500,200);   // an offset for the window from top left 
-        setTitle("After  Login  Page");
+        setTitle("After  Login  Page  for  Hotel");
         
     }
 
     public void setLocationAndSize(){
         l1.setBounds(450,10,300,30);
-        l2.setBounds(450,60,300,30);
-        l3.setBounds(690,420,300,30);
+        //l2.setBounds(450,60,300,30);
+        //l3.setBounds(690,420,300,30);
 
-        sp1.setBounds(250,100,500,150);
-        sp2.setBounds(550,450,400,150);
+        // sp1.setBounds(250,100,500,150);
+        // sp2.setBounds(550,450,400,150);
 
-        b1.setBounds(660,610,150,30);
+        // b1.setBounds(660,610,150,30);
 
-        tp.setBounds(70,400,400,180);
+        // tp.setBounds(70,400,400,180);
 
-        // Add Item Panel
-        lAdd.setBounds(5,5,150,30);
-        tAdd.setBounds(5,50,150,30);
+        // // Add Item Panel
+        // lAdd.setBounds(5,5,150,30);
+        // tAdd.setBounds(5,50,150,30);
 
-        lQuantity.setBounds(170,5,150,30);
-        tQuantity.setBounds(170,50,150,30);
+        // lQuantity.setBounds(170,5,150,30);
+        // tQuantity.setBounds(170,50,150,30);
 
-        bAdd.setBounds(100,90,100,30);
+        // bAdd.setBounds(100,90,100,30);
 
-        // Delete Item Panel
-        lDelete.setBounds(75,5,150,30);
-        tDelete.setBounds(75,50,150,30);
+        // // Delete Item Panel
+        // lDelete.setBounds(75,5,150,30);
+        // tDelete.setBounds(75,50,150,30);
 
-        bDelete.setBounds(100,90,100,30);
+        // bDelete.setBounds(100,90,100,30);
 
         // b1.setBounds(400,150,120,30);
         // b2.setBounds(400,220,120,30);        
@@ -162,29 +154,29 @@ public class AfterLoginCFrame extends JFrame implements ActionListener  {
 
     public void addComponentstoUI(){
         add(l1);
-        add(l2);
-        add(l3);
+       // add(l2);
+      //  add(l3);
 
-        add(sp1);
-        add(sp2);
+        // add(sp1);
+        // add(sp2);
 
-        add(b1);
+        // add(b1);
 
-        tp.add("Add Item", add);
-        tp.add("Delete Item", delete);
+        // tp.add("Add Item", add);
+        // tp.add("Delete Item", delete);
 
-        add.add(lAdd);
-        add.add(lQuantity);
-        add.add(tAdd);
-        add.add(tQuantity);
-        add.add(bAdd);
+        // add.add(lAdd);
+        // add.add(lQuantity);
+        // add.add(tAdd);
+        // add.add(tQuantity);
+        // add.add(bAdd);
 
 
-        delete.add(lDelete);
-        delete.add(tDelete);
-        delete.add(bDelete);
+        // delete.add(lDelete);
+        // delete.add(tDelete);
+        // delete.add(bDelete);
 
-        add(tp);
+        // add(tp);
         
       //  add(menu);
       //  add(h);
@@ -296,10 +288,3 @@ public class AfterLoginCFrame extends JFrame implements ActionListener  {
 }
 
 
-//  class A {
-//     public static void main(String[] args) throws Exception {
-//         AfterLoginCFrame obj = new AfterLoginCFrame();
-
-      
-//     }
-// }

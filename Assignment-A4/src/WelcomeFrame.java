@@ -88,7 +88,7 @@ public class WelcomeFrame extends JFrame implements ActionListener  {
             System.out.println("Hotel");
             ServerConnection.sendChoice(2);
 
-            new LoginFrame();
+            new HLoginFrame();
             dispose();
         }
         else

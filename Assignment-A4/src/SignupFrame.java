@@ -100,6 +100,11 @@ public class SignupFrame extends JFrame implements ActionListener  {
 
             try{
                 Client.registerCustomer(f, l,u, p);
+                JOptionPane.showMessageDialog(this, "Registration Successful!!"); 
+                Client.sendChoice(1);
+
+                new LoginFrame();
+                dispose();
             }
             catch(Exception exc)
             {

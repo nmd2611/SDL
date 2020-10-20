@@ -229,6 +229,15 @@ public class Client {
         return c;
     }
 
+    public static Hotel getHotel() throws ClassNotFoundException, IOException
+    {
+        System.out.println("Aya in get hotel");
+        Hotel h;
+        h = (Hotel) oin.readObject();
+
+        return h;
+    }
+
     public static Vector<Hotel> getHotels() throws ClassNotFoundException, IOException
     {
         System.out.println("Aya in get hotels");
