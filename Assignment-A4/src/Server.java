@@ -186,6 +186,8 @@ public class Server  {
 
     public static void forHotel() throws IOException {
 
+        boolean found = false;
+        
         System.out.println("Inside Hotel");
         String userName, password;
 
@@ -194,7 +196,7 @@ public class Server  {
 
         System.out.println(userName + "  " + password);
 
-        boolean found = false;
+        found = false;
 
         try{
             rs = stmt.executeQuery("select * from hotel where userName = " + "\"" + userName + "\" and password = " + "\"" + password + "\""  );
@@ -221,6 +223,7 @@ public class Server  {
         catch(Exception e){
 
         }
+    
 
     }
 

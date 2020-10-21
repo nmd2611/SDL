@@ -102,7 +102,7 @@ public class HLoginFrame extends JFrame implements ActionListener  {
                 else{
                     System.out.println("Not balle balle");
                     JOptionPane.showMessageDialog(this, "Invalid Credentials!!"); 
-                    Client.sendChoice(1);
+                    //Client.sendChoice(1);
                 }
             }
             catch(Exception tp)
