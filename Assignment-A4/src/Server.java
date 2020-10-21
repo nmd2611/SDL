@@ -153,7 +153,7 @@ public class Server  {
         else if(ch == 3)
         {
             // chatbox
-          //  System.out.println("Chat");
+            System.out.println("Inside Chat");
             String s;
             String response;
             
@@ -162,8 +162,8 @@ public class Server  {
                 s = (String)oin.readObject();
                 System.out.println("[FROM CLIENT] : " + s);
 
-                if(s.toUpperCase().equals("OVER"))
-                break;
+                //if(s.toUpperCase().equals("OVER"))
+                //oout.writeObject("OVER");
 
                 System.out.print("[SERVER (Enter your message)] : ");
                 response = sc.nextLine();

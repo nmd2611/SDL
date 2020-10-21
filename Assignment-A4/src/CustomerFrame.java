@@ -93,6 +93,9 @@ public class CustomerFrame extends JFrame implements ActionListener  {
         {
             System.out.println("Chat");
             Client.sendChoice(3);
+
+            new ChatFrame();
+            dispose();
         }
         else
         {

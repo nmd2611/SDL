@@ -149,6 +149,8 @@ public class Client {
         
     }
 
+    
+
     public static void forHotel() throws ClassNotFoundException, IOException {
 
         int ch;
@@ -246,6 +248,31 @@ public class Client {
         return hotels;
     }
 
+    public static String sendMessageToServer(String s) throws ClassNotFoundException, IOException
+    {
+        String response;
+        
+        if(s.equals("OVER"))
+            {
+                oout.writeObject("OVER");
+                return "OVER";
+            }
+        
+        oout.writeObject(s);
+        //if(s.toUpperCase().equals("OVER"))
+        //return;
+
+        System.out.println("Waiting for server's response..");
+        response =(String) oin.readObject();
+
+        return response;
+       // System.out.println("[FROM SERVER] : " + response);
+
+        //if(response.toUpperCase().equals("OVER"))
+        //return;
+    }
+
+    
     
 
     public static void main(String args[]) throws IOException, ClassNotFoundException {
