@@ -118,6 +118,7 @@ public class AfterLoginCFrame extends JFrame implements ActionListener  {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         setLocation(500,200);   // an offset for the window from top left 
         setTitle("After  Login  Page");
+
         
     }
 

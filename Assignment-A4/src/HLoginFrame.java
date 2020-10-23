@@ -84,7 +84,7 @@ public class HLoginFrame extends JFrame implements ActionListener  {
 
                 if(status)
                 {
-                    System.out.println("Balle Balle");
+                   
 
                     Hotel h = Client.getHotel();
                     //Customer c = Client.getCustomer();
@@ -100,7 +100,7 @@ public class HLoginFrame extends JFrame implements ActionListener  {
                     ///System.out.println(hotels);
                 }
                 else{
-                    System.out.println("Not balle balle");
+                    
                     JOptionPane.showMessageDialog(this, "Invalid Credentials!!"); 
                     //Client.sendChoice(1);
                 }

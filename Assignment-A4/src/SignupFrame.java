@@ -57,7 +57,7 @@ public class SignupFrame extends JFrame implements ActionListener  {
         t3.setBounds(470,290,120,30);
         t4.setBounds(470,360,120,30);
 
-        b1.setBounds(410,450, 100, 30);
+        b1.setBounds(410,450, 130, 30);
 
     }
 

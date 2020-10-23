@@ -31,7 +31,6 @@ public class Client {
     static {
         sc =  new Scanner(System.in);
         try {
-            
 
             
 
@@ -217,14 +216,14 @@ public class Client {
 
     public static boolean getStatus() throws ClassNotFoundException, IOException
     {
-        System.out.println("Aya in get status");
+        
         boolean status = Boolean.parseBoolean(in.readLine());
         return status;
     }
 
     public static Customer getCustomer() throws ClassNotFoundException, IOException
     {
-        System.out.println("Aya in get customer");
+        
         Customer c;
         c = (Customer) oin.readObject();
 
@@ -233,7 +232,7 @@ public class Client {
 
     public static Hotel getHotel() throws ClassNotFoundException, IOException
     {
-        System.out.println("Aya in get hotel");
+       
         Hotel h;
         h = (Hotel) oin.readObject();
 
@@ -242,7 +241,7 @@ public class Client {
 
     public static Vector<Hotel> getHotels() throws ClassNotFoundException, IOException
     {
-        System.out.println("Aya in get hotels");
+        
         Vector<Hotel> hotels = (Vector<Hotel>) oin.readObject();
 
         return hotels;
