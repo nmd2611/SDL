@@ -70,12 +70,14 @@ public class Server  {
         */
         do{
          ch = Integer.parseInt(in.readLine()); 
-        //System.out.println("Server received --" + ch);
+        System.out.println("Server received -" + ch);
 
         System.out.println(Thread.currentThread().getName());
 
         if(ch == 1)
         {
+            System.out.println("Inside 1");
+
             String userName, password;
         userName = in.readLine();
         password = in.readLine();
@@ -145,13 +147,13 @@ public class Server  {
          //   cust.add(c1);
 
           
-           out.println("User added successfully!");
+         //  out.println("User added successfully!");
         }
 
         else if(ch == 3)
         {
             // chatbox
-          //  System.out.println("Chat");
+            System.out.println("Inside Chat");
             String s;
             String response;
             
@@ -160,8 +162,8 @@ public class Server  {
                 s = (String)oin.readObject();
                 System.out.println("[FROM CLIENT] : " + s);
 
-                if(s.toUpperCase().equals("OVER"))
-                break;
+                //if(s.toUpperCase().equals("OVER"))
+                //oout.writeObject("OVER");
 
                 System.out.print("[SERVER (Enter your message)] : ");
                 response = sc.nextLine();
@@ -184,7 +186,9 @@ public class Server  {
 
     public static void forHotel() throws IOException {
 
-        System.out.println("For Hotel");
+        boolean found = false;
+        
+        System.out.println("Inside Hotel");
         String userName, password;
 
         userName = in.readLine();
@@ -192,7 +196,7 @@ public class Server  {
 
         System.out.println(userName + "  " + password);
 
-        boolean found = false;
+        found = false;
 
         try{
             rs = stmt.executeQuery("select * from hotel where userName = " + "\"" + userName + "\" and password = " + "\"" + password + "\""  );
@@ -201,18 +205,25 @@ public class Server  {
             if(rs.next()){
                 Hotel tp = new Hotel(rs.getInt(1), rs.getString(2), rs.getString(3));
                 
-                oout.writeObject(true);
+                out.println(true);
                 found = true;
+                
 
                 oout.writeObject(tp);
         }
         else{
             System.out.println("Invalid credentials !!");
         }
+        
+        if(found)
+        {
+            System.out.println("hotel Login success");
+        }
     }
         catch(Exception e){
 
         }
+    
 
     }
 

@@ -7,6 +7,9 @@ import java.sql.DriverManager;
 
 public class Hotel implements Serializable {
 
+    // this has been added in order to resolve a runtime error due to  Serializable
+    private static final long serialVersionUID = -3283854368455366448L;
+
     static Scanner sc = new Scanner(System.in);
 
     private int id;
@@ -188,6 +191,74 @@ public class Hotel implements Serializable {
 
         return -1;
     }
+
+    public Map<String, Integer> getMenu()
+    {
+        try{
+            map.clear();
+            rs =  stmt.executeQuery("select * from items where hotel_id = " + id );
+
+            while(rs.next()){
+                map.put(rs.getString(3), rs.getInt(4));
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return map;
+
+    }
+
+
+    public static void addItemToDb(int id, String n, int p)
+    {
+        try{ 
+            stmt.executeUpdate("INSERT INTO items(hotel_id, name, price) values ( " + id + ", \"" + n+ "\", " +p +  ")");
+            System.out.println("Item added");
+        }
+        catch(Exception e)
+        {
+            System.out.println("hfsfsf");
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteItemFromDb(int id, String n)
+    {
+        try{
+            
+            String pt = "delete from items where hotel_id = " + id + " and  name = \'" + n + "\' ;" ;
+            //System.out.println(pt);
+    
+            stmt.executeUpdate(pt);
+            System.out.println("deleted");
+    
+        }
+        catch(Exception e)
+        {
+           e.printStackTrace();
+        }
+    }
+
+    public static void modifyItemToDb(int newp, int id, String n)
+    {
+        try{
+            String t = "UPDATE items SET price = " + newp + " where hotel_id = " + id + " and name = \"" + n + "\"" ;
+          //  System.out.println(t);
+            stmt.executeUpdate(t);
+
+            System.out.println("Item modified");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+
+    
 
     public void afterLogin() {
 

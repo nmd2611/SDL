@@ -4,6 +4,9 @@ import java.sql.*;
 
 public class Customer implements Serializable {
 
+    // this has been added in order to resolve a runtime error due to  Serializable
+    private static final long serialVersionUID = -4936322238277352602L;
+
      static Scanner sc = new Scanner(System.in) ;
 
     private int id;
@@ -198,6 +201,18 @@ public class Customer implements Serializable {
        System.out.println("Your Total amount is Rs."+ total);
        System.out.println("Thank You");
         
+    }
+
+    public static void placeOrder(int id, int total, int hotel_id)
+    {
+        try{
+            stmt.executeUpdate("insert into orders(customer_id, amount, hotel_id) values (" + id + ","+ total + "," + hotel_id + ")");
+          // System.out.println(id+" "+ total + " " + hotel_id);
+        }
+           catch(Exception e)
+           {
+               System.out.println(e.getMessage());
+           }
     }
 
     public void order(Hotel h) {

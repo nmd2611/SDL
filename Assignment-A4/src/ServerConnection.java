@@ -5,10 +5,12 @@ import java.util.*;
 
 
 public class ServerConnection implements Runnable {
-    private static Socket soc;
-    private BufferedReader in;
+    public static Socket soc;
+    public BufferedReader in;
 
-    private PrintWriter out;
+     public static PrintWriter out;
+
+     public static WelcomeFrame wframe;
 
     public ServerConnection(Socket s) throws IOException {
         soc = s;
@@ -25,6 +27,8 @@ public class ServerConnection implements Runnable {
             System.out.println(in.readLine());
             do{
             System.out.println(in.readLine());
+
+            wframe  = new WelcomeFrame();
 
              ch = sc.nextInt();
 
@@ -68,4 +72,12 @@ public class ServerConnection implements Runnable {
         }
 
     }
+
+    public static void sendChoice(int ch)
+    {
+       // System.out.println("before Value sent");
+        out.println(ch);
+        //System.out.println("Value sent");
+    }
+
 }

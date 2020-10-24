@@ -25,10 +25,12 @@ public class Client {
     static ObjectOutputStream oout;
     static ObjectInputStream oin;
 
+    static LoginFrame loginFrame;
+    static CustomerFrame cframe;
+
     static {
         sc =  new Scanner(System.in);
         try {
-            
 
             
 
@@ -48,17 +50,19 @@ public class Client {
         String userName, password;
         ch = sc.nextInt();
 
+        cframe = new CustomerFrame();
+
      //   System.out.println(Thread.currentThread().getName());
 
         out.println(ch);
         if (ch == 1) {
-            System.out.print("Enter UserName : ");
-            userName = sc.next();
-            System.out.print("Enter Password : ");
-            password = sc.next();
+            // System.out.print("Enter UserName : ");
+            // userName = sc.next();
+            // System.out.print("Enter Password : ");
+            // password = sc.next();
+            //loginFrame = new LoginFrame();
 
-            out.println(userName);
-            out.println(password);
+            
 
             boolean found = Boolean.parseBoolean(in.readLine());
             System.out.println(found);
@@ -144,13 +148,16 @@ public class Client {
         
     }
 
+    
+
     public static void forHotel() throws ClassNotFoundException, IOException {
 
         int ch;
             System.out.println(" ********** Hotel Page ********** ");
        // System.out.println("1. Login \n2. SignUp \n3. Chat \n4. Exit");
             String userName, password;
-        
+
+          //  loginFrame = new LoginFrame();
     
             System.out.print("Enter UserName : ");
             userName = sc.next();
@@ -161,7 +168,7 @@ public class Client {
             out.println(password);
 
              boolean found = (boolean)oin.readObject();
-             //System.out.println(found + " tp");
+             System.out.println(found + " tp");
 
              Hotel h;
              if (found) {
@@ -178,6 +185,94 @@ public class Client {
  
 
     }
+
+    public static void sendCredentials(String u, String p)
+    {
+       // u = loginFrame.getUsername();
+       // p = loginFrame.getPassword();
+
+        System.out.println("Client :  " + u + " " + p);
+            
+
+        out.println(u);
+        out.println(p);
+    }
+
+    public static void registerCustomer(String fName, String lName,String userName, String password) throws ClassNotFoundException, IOException
+    {
+        System.out.println("reg cust");
+        Customer n = new Customer(3, userName, fName, lName, "test", 12345, password);
+
+            // sending the user data to the server
+        oout.writeObject(n);
+    }
+
+    public static void sendChoice(int ch)
+    {
+       // System.out.println("before Value sent");
+        out.println(ch);
+        //System.out.println("Value sent");
+    }
+
+    public static boolean getStatus() throws ClassNotFoundException, IOException
+    {
+        
+        boolean status = Boolean.parseBoolean(in.readLine());
+        return status;
+    }
+
+    public static Customer getCustomer() throws ClassNotFoundException, IOException
+    {
+        
+        Customer c;
+        c = (Customer) oin.readObject();
+
+        return c;
+    }
+
+    public static Hotel getHotel() throws ClassNotFoundException, IOException
+    {
+       
+        Hotel h;
+        h = (Hotel) oin.readObject();
+
+        return h;
+    }
+
+    public static Vector<Hotel> getHotels() throws ClassNotFoundException, IOException
+    {
+        
+        Vector<Hotel> hotels = (Vector<Hotel>) oin.readObject();
+
+        return hotels;
+    }
+
+    public static String sendMessageToServer(String s) throws ClassNotFoundException, IOException
+    {
+        String response;
+        
+        if(s.equals("OVER"))
+            {
+                oout.writeObject("OVER");
+                return "OVER";
+            }
+        
+        oout.writeObject(s);
+        //if(s.toUpperCase().equals("OVER"))
+        //return;
+
+        System.out.println("Waiting for server's response..");
+        response =(String) oin.readObject();
+
+        return response;
+       // System.out.println("[FROM SERVER] : " + response);
+
+        //if(response.toUpperCase().equals("OVER"))
+        //return;
+    }
+
+    
+    
 
     public static void main(String args[]) throws IOException, ClassNotFoundException {
         
