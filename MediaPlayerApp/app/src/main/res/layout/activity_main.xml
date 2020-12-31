@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/songName"
+        android:layout_width="300dp"
+        android:layout_height="20dp"
+        android:layout_above="@+id/seekbar"
+        android:layout_centerHorizontal="true"
+        />
+
+    <SeekBar
+        android:id="@+id/seekbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_above="@id/play"
+        android:layout_margin="20dp"
+        />
+
+    <Button
+        android:id="@+id/play"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+       android:layout_toLeftOf="@id/pause"
+        android:layout_centerVertical="true"
+        android:onClick="handlePlay"
+        android:background="@drawable/ic_baseline_play_arrow_24"
+        android:text="" />
+
+    <Button
+        android:id="@+id/pause"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:onClick="handlePause"
+        android:background="@drawable/ic_baseline_pause_24"
+        android:layout_marginHorizontal="30dp"
+        android:text=""
+        />
+
+    <Button
+        android:id="@+id/stop"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_toRightOf="@id/pause"
+        android:layout_centerVertical="true"
+        android:onClick="handleStop"
+        android:background="@drawable/ic_baseline_stop_24"
+        android:text="" />
+
+<!--    <Button-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:id="@+id/prev"-->
+<!--        android:text="Previous"-->
+<!--        android:layout_below="@id/pause"-->
+<!--        />-->
+
+<!--    <Button-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:id="@+id/next"-->
+<!--        android:text="Next"-->
+<!--        android:layout_below="@id/stop"-->
+<!--        android:layout_marginHorizontal="170dp"-->
+<!--        />-->
+
+</RelativeLayout>
